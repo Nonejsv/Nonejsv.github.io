@@ -1,0 +1,1347 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Nonejsv-孙</title>
+        <link>http://localhost:1313/</link>
+        <description>Recent content on Nonejsv-孙</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Nonejsv-sun</copyright>
+        <lastBuildDate>Sat, 29 Nov 2025 19:12:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>正则表达式</title>
+        <link>http://localhost:1313/p/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+        <pubDate>Sat, 29 Nov 2025 19:12:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+        <description>&lt;h1 id=&#34;正则表达式&#34;&gt;正则表达式
+&lt;/h1&gt;&lt;h2 id=&#34;1-概述&#34;&gt;1. 概述
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;正则表达式的作用&lt;/li&gt;
+&lt;li&gt;正则表达式的字符类&lt;/li&gt;
+&lt;li&gt;正则表达式的逻辑运算符&lt;/li&gt;
+&lt;li&gt;正则表达式的预定义字符类&lt;/li&gt;
+&lt;li&gt;正则表达式的限定符&lt;/li&gt;
+&lt;li&gt;正则表达式的分组&lt;/li&gt;
+&lt;li&gt;在String的split方法中使用正则表达式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-概念&#34;&gt;2. 概念
+&lt;/h2&gt;&lt;p&gt;正则表达式可以用于验证字符串是否符合规范，就是用来验证各种字符串的规则，内部描述了一些规则，可以验证用户输入的字符串是否符合这个规则。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以校验字符串是否满足规则&lt;/li&gt;
+&lt;li&gt;在一串文本中查找需要的内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;字符串的自带方法matches&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;3-字符类&#34;&gt;3. 字符类
+&lt;/h2&gt;&lt;p&gt;示例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129170027966.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129170027966&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\[abc\]：代表a或者b，或者c字符中的一个。&lt;/li&gt;
+&lt;li&gt;\[^abc\]：代表除a,b,c以外的任何字符。&lt;/li&gt;
+&lt;li&gt;[a-z]：代表a-z的所有小写字符中的一个。&lt;/li&gt;
+&lt;li&gt;[A-Z]：代表A-Z的所有大写字符中的一个。&lt;/li&gt;
+&lt;li&gt;[0-9]：代表0-9之间的某一个数字字符。&lt;/li&gt;
+&lt;li&gt;[a-zA-Z0-9]：代表a-z或者A-Z或者0-9之间的任意一个字符。&lt;/li&gt;
+&lt;li&gt;[a-dm-p]：a 到 d 或 m 到 p之间的任意一个字符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129170153842.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129170153842&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;字符类一个中括号只能对应一个字符，多个字符出现则会返回false，说明字符的个数也需要严格匹配。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129170409049.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129170409049&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&amp;amp;&amp;amp;如下的逻辑运算符，可以用在表示不同的范围上面&lt;/p&gt;
+&lt;h2 id=&#34;4-逻辑运算符&#34;&gt;4. 逻辑运算符
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&amp;amp;&amp;amp;：并且&lt;/li&gt;
+&lt;li&gt;|    ：或者&lt;/li&gt;
+&lt;li&gt;\  ：转义字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-预定义字符&#34;&gt;5. 预定义字符
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&amp;quot; . &amp;quot; ： 匹配任何字符。&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;\d&amp;rdquo;：任何数字[0-9]的简写；&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;\D&amp;rdquo;：任何非数字\[^0-9\]的简写；&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;\s&amp;rdquo;： 空白字符：[ \t\n\x0B\f\r] 的简写&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;\S&amp;rdquo;： 非空白字符：\[^\s\] 的简写&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;\w&amp;rdquo;：单词字符：[a-zA-Z_0-9]的简写&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;\W&amp;rdquo;：非单词字符：\[^\w\]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;C:\Users\17772\AppData\Roaming\Typora\typora-user-images\image-20251129170607784.png&#34; alt=&#34;image-20251129170607784&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;拓展：转义字符\&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129171111231.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;因为一个杠是表示转移字符，这是他原本的含义，当我们想要杠来表示出其他的含义时，就需要再来一个杠来转义第二个杠。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129171323775.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129171323775&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;小写的与大写的是相反的，而&lt;strong&gt;预定义字符&lt;/strong&gt;是对常用字符类的快捷概括&lt;/p&gt;
+&lt;h2 id=&#34;6-数量词&#34;&gt;6. 数量词
+&lt;/h2&gt;&lt;p&gt;因为前面学习的字符类和预定义字符都是针对一个字符来进行匹配，需要数量词来进行对数量的约束。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129171531355.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129171531355&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;X 是用来表示任意内容的。（可以用字符类或者预定义字符来代表）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129171647749.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129171647749&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：不需要死记硬背每个符号表示什么，上面涉及的只是正则表达式的一部分，有个大概的了解，要用到的时候直接去查找API文档就可以。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;7爬虫&#34;&gt;7.爬虫
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251129185118042.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20251129185118042&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;8string&#34;&gt;8.String
+&lt;/h2&gt;&lt;h2 id=&#34;9分组括号&#34;&gt;9.分组括号（）
+&lt;/h2&gt;&lt;h2 id=&#34;10非捕获分组&#34;&gt;10.非捕获分组
+&lt;/h2&gt;&lt;p&gt;概念：&lt;/p&gt;
+&lt;p&gt;分组之后不需要再用本组数据，而仅仅是把数据括起来。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>抽象类&amp;接口&amp;内部类</title>
+        <link>http://localhost:1313/p/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E5%86%85%E9%83%A8%E7%B1%BB/</link>
+        <pubDate>Wed, 26 Nov 2025 11:18:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E5%86%85%E9%83%A8%E7%B1%BB/</guid>
+        <description>&lt;h1 id=&#34;抽象类&#34;&gt;抽象类
+&lt;/h1&gt;&lt;h2 id=&#34;1-概述&#34;&gt;1. 概述
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;针对面向对象中的继承专门设置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用了关键词abstract来进行对方法的定义，这样的方法可以叫做抽象类，抽象方法所在的类就叫做抽象类。&lt;/p&gt;
+&lt;p&gt;可以用来解决在应对继承某些人故意不去重写子类的方法来应对需求，如果用abstract来进行标记，则在创造子类时必须进行对方法的重写，要不然报错。&lt;/p&gt;
+&lt;h2 id=&#34;2抽象方法&#34;&gt;2.抽象方法
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;抽象方法：将&lt;strong&gt;共性&lt;/strong&gt;的行为（&lt;strong&gt;方法&lt;/strong&gt;）抽取到父类之后，由于每一个子类的执行内容不一样，所以在父类之中不能确认&lt;strong&gt;具体的方法体&lt;/strong&gt;。这样的方法就叫做抽象方法。&lt;/li&gt;
+&lt;li&gt;抽象类:如果一个类之中&lt;strong&gt;存在抽象方法&lt;/strong&gt;，该类就必须&lt;strong&gt;声明为抽象类&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;定义格式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;抽象方法：public &lt;strong&gt;abstract&lt;/strong&gt; 返回值类型 方法名（参数列表）；&lt;/p&gt;
+&lt;p&gt;​					（&lt;strong&gt;注意：抽象方法没有方法体&lt;/strong&gt;，直接写分号结束）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;抽象类：public &lt;strong&gt;abstract&lt;/strong&gt; class 类名{}&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意事项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;抽象类不能实例化（抽象类不可以创建对象）&lt;/li&gt;
+&lt;li&gt;抽象类不一定有抽象方法，有抽象方法一定是抽象类&lt;/li&gt;
+&lt;li&gt;可以有构造方法（可是他都不可以创建对象，要构造方法干什么？抽象类的子类有什么用）&lt;/li&gt;
+&lt;li&gt;抽象类的子类
+&lt;ul&gt;
+&lt;li&gt;要么重写父类中的所有抽象方法&lt;/li&gt;
+&lt;li&gt;要么子类也是抽象类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;接口&#34;&gt;接口
+&lt;/h1&gt;&lt;h2 id=&#34;1-为什么有接口&#34;&gt;1. 为什么有接口？
+&lt;/h2&gt;&lt;p&gt;在面向对象的过程中，会遇到比如一个父类多个子类的情况下，想要给几个特定的子类中接入同一个方法，但是也要限定某几个子类不会接入同一个方法，这种情况下不能直接把这个方法写在父类之中，否则这个方法会所有的子类都具有，不符合我们的要求。&lt;/p&gt;
+&lt;p&gt;这个时候，就需要接口的存在，我们可以设定单一方法的接口，然后再我们需要的子类中接入这个接口，就可以实现相应的方法，符合我们的需求了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意，接口之中全部都是抽象方法，接口之中同样也是不可以创建对象的&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-定义格式&#34;&gt;2. 定义格式
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//接口的定义格式：&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;接口名称&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 抽象方法&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 接口的声明：interface&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 接口名称：首字母大写，满足“驼峰模式”&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接口的声明：interface&lt;/p&gt;
+&lt;h2 id=&#34;3-接口的特点&#34;&gt;3. 接口的特点
+&lt;/h2&gt;&lt;p&gt;在JDK7，接口中&lt;strong&gt;只有&lt;/strong&gt;包含：抽象方法和常量&lt;/p&gt;
+&lt;h3 id=&#34;31-抽象方法&#34;&gt;3.1 抽象方法
+&lt;/h3&gt;&lt;p&gt;注意，接口之中的抽象方法会自动加上&lt;code&gt;public abstract&lt;/code&gt;修饰，而我们不需要自己手动再加上。&lt;/p&gt;
+&lt;p&gt;按照规范，这个不用加，因为默认会加上&lt;/p&gt;
+&lt;h3 id=&#34;32-常量&#34;&gt;3.2 常量
+&lt;/h3&gt;&lt;p&gt;在接口之中的成员变量会自动加上&lt;code&gt;public abstract final&lt;/code&gt;来进行修饰，所以说他实际上不可被修改，是一个常量。同时静态化的变量可以直接用接口名访问，所以也叫作常量。&lt;/p&gt;
+&lt;p&gt;常量必须要给初始值，同时建议命名全部用大写字母，多个单词用下划线连接。&lt;/p&gt;
+&lt;h2 id=&#34;4-基本的实现&#34;&gt;4. 基本的实现
+&lt;/h2&gt;&lt;p&gt;（😘家人们，终于看到实现了）&lt;/p&gt;
+&lt;h3 id=&#34;41-概述&#34;&gt;4.1 概述
+&lt;/h3&gt;&lt;p&gt;类和接口之间的关系叫做实现关系，即&lt;strong&gt;类实现接口&lt;/strong&gt;，这个类可以叫做接口的实现类，也可以叫做接口的子类。实现的动作类似继承，格式相仿，只是关键字不同，实现使用&lt;code&gt;implements&lt;/code&gt;关键字。&lt;/p&gt;
+&lt;h3 id=&#34;42-实现格式&#34;&gt;4.2 实现格式
+&lt;/h3&gt;&lt;h2 id=&#34;5-接口和接口的多继承&#34;&gt;5. 接口和接口的多继承
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;类与接口是实现关系&lt;/li&gt;
+&lt;li&gt;接口与接口是继承关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接口继承接口就是把其他接口的抽象方法与本接口进行了合并。&lt;/p&gt;
+&lt;h1 id=&#34;内部类&#34;&gt;内部类
+&lt;/h1&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;类的五大成员：属性，方法，构造方法，代码块，内部类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;属性&lt;/li&gt;
+&lt;li&gt;方法&lt;/li&gt;
+&lt;li&gt;构造方法&lt;/li&gt;
+&lt;li&gt;代码块&lt;/li&gt;
+&lt;li&gt;内部类（双重类）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;思考应用场景：&lt;/p&gt;
+&lt;p&gt;类是一个抽象对象，而属性和行为是他的主体，但是属性也可以有多种分类，比如人可以分为器官组织细胞，从某个层面来说，器官这类也属于一个单独的个体，这个时候就可以使用内部类加以分类&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;B类事物是A类事物的一部分，而且B类事物单独存在没有意义&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;比如：汽车的发动机，ArrayList的迭代器，人的心脏&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内部类表示的事物是外部的一部分&lt;/p&gt;
+&lt;p&gt;内部类单独出现没有意义&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;内部类的访问特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以直接访问外部类的成员，包括私有&lt;/li&gt;
+&lt;li&gt;外部类要访问内部类的成员，必须创建对象（有点不理解：大概就是在外部类调用内部类是，要先用new的方式创建对象）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;举例：Arraylist中的迭代器也是一种内部类&lt;/p&gt;
+&lt;p&gt;使用快捷键ctrl+F2  可以快速查看当前类的内部结构（包含的方法，内部类等）&lt;/p&gt;
+&lt;h2 id=&#34;内部类的分类&#34;&gt;内部类的分类
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;成员内部类&lt;/li&gt;
+&lt;li&gt;静态内部类&lt;/li&gt;
+&lt;li&gt;局部内部类&lt;/li&gt;
+&lt;li&gt;匿名内部类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（前三个了解即可，会在看源代码是去了解，第四个最重要）&lt;/p&gt;
+&lt;h3 id=&#34;匿名内部类&#34;&gt;匿名内部类
+&lt;/h3&gt;&lt;p&gt;（就是隐藏了名字的内部类，可以写在成员位置（方法外面），也可以写在局部位置（方法里面））&lt;/p&gt;
+&lt;p&gt;书写格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;new 类名或者接口名（） {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;​	//重写方法；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}；
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;实现关系（实现了类名或者接口名的关系）&lt;/li&gt;
+&lt;li&gt;方法的重写（）&lt;/li&gt;
+&lt;li&gt;创建对象（使用了new创建没有名字的对象）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（&lt;em&gt;&lt;strong&gt;从语法上来解释，应该叫做匿名内部类的对象&lt;/strong&gt;&lt;/em&gt;）&lt;/p&gt;
+&lt;h4 id=&#34;使用场景&#34;&gt;使用场景
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;当我们希望定义一个只会使用一次的类，就可以考虑使用匿名内部类。本质上，它可以简化代码。&lt;/strong&gt;
+之前所学习的内容在使用接口时，有如下操作（我是跳过来的，不知道有什么操作）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定义子类&lt;/li&gt;
+&lt;li&gt;重写接口中的方法&lt;/li&gt;
+&lt;li&gt;创建子类对象&lt;/li&gt;
+&lt;li&gt;调用重写后的方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Swim&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;abstract&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;swimming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 1. 定义接口的实现类&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Swim&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 2. 重写抽象方法&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;swimming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;狗刨式...&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 3. 创建实现类对象&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Student&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 4. 调用方法&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;swimming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;而匿名内部类就是简化四步为一步的快捷方式&lt;/p&gt;
+&lt;h4 id=&#34;匿名内部类的前提和格式&#34;&gt;匿名内部类的前提和格式
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;必须继承一个父类&lt;/strong&gt;或者&lt;strong&gt;实现一个父接口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;父类名或者接口名&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 方法重写&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 执行语句&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;匿名内部类的特点&#34;&gt;匿名内部类的特点
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>疑惑记录点位</title>
+        <link>http://localhost:1313/p/%E7%96%91%E6%83%91%E8%AE%B0%E5%BD%95%E7%82%B9%E4%BD%8D/</link>
+        <pubDate>Wed, 26 Nov 2025 10:40:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%96%91%E6%83%91%E8%AE%B0%E5%BD%95%E7%82%B9%E4%BD%8D/</guid>
+        <description>&lt;h3 id=&#34;this关键字的作用&#34;&gt;this关键字的作用
+&lt;/h3&gt;&lt;p&gt;想起来了就近原则和就远原则区别，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; hey有没有弄明白呢现在&lt;/p&gt;
+&lt;p&gt;明白了,this是就远原则&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;🤗(●&amp;rsquo;◡&amp;rsquo;●)&lt;/p&gt;
+&lt;h3 id=&#34;小疑惑&#34;&gt;小疑惑
+&lt;/h3&gt;&lt;p&gt;那种可以自动生成private的封装功能的成员方法的快捷键是什么?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;快捷键alt + insert可以自动插入什么东西？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;方法重载怎么用的？&lt;/p&gt;
+&lt;p&gt;顶层父类是Object类。所有的类默认继承Object，作为父类，什么意思？&lt;/p&gt;
+&lt;p&gt;捕获异常怎么用？&lt;/p&gt;
+&lt;p&gt;啥是实现类构造器？&lt;/p&gt;
+&lt;p&gt;多态体现的实现关系是什么意思？&lt;/p&gt;
+&lt;p&gt;Arrays.toString是什么东西？&lt;/p&gt;
+&lt;p&gt;纳尼纳尼what is xml？&lt;/p&gt;
+&lt;p&gt;方法的方法重载如果形参的名字不一样,但是数据类型一样会构成重载嘛?&lt;/p&gt;
+&lt;p&gt;API帮助文档怎么用?&lt;/p&gt;
+&lt;p&gt;字符串的存储原理?&lt;/p&gt;
+&lt;p&gt;继承里面构造方法里面继承后的特点-构造方法说是子类默认有一个super（）是什么意思？&lt;/p&gt;
+&lt;p&gt;父类子类继承重写方法要写@Overrride吗&lt;/p&gt;
+&lt;p&gt;什么是引用数据类型，什么是基础数据类型（存储的是数据还是地址的意思）&lt;/p&gt;
+&lt;p&gt;native是什么意思&lt;/p&gt;
+&lt;p&gt;定义接口中的实现类是什么意思&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>面向对象</title>
+        <link>http://localhost:1313/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
+        <pubDate>Tue, 25 Nov 2025 23:26:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
+        <description>&lt;h2 id=&#34;1类和对象&#34;&gt;1.类和对象
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;如何理解&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;简单描述来说的话，类是抽象的对象，而对象则是具象的类。&lt;/p&gt;
+&lt;p&gt;类是对象的数据类型。类是由属性和行为两个部分组成的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;属性：在类中通过&lt;strong&gt;成员变量&lt;/strong&gt;来体现
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;成员变量是什么&lt;/em&gt;（类之中方法之外的变量就是成员变量）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;行为：在类中通过&lt;strong&gt;成员方法&lt;/strong&gt;来体现
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;成员方法是什么&lt;/em&gt;：（相比于常见的方法要去掉static关键词即可）
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;哈哈&lt;/strong&gt;，那么static又是什么呢：此事在&lt;strong&gt;面向对象进阶&lt;/strong&gt;之中亦有记载，这里简单说明一下有无static修饰的区别在于是否独独属于这个对象还是整个类，会在进阶内仔细研究，Cialiao~&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;属性是事物的特征，以学生为例子，性别年龄身高体重&lt;/p&gt;
+&lt;p&gt;行为是事物能执行的操作，重点在于事物自身，比如人开门则是门的行为。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public class 类名 {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	// 成员变量
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	变量1的数据类型 变量1；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	变量2的数据类型 变量2;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	…
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	// 成员方法
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	方法1;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	方法2;	
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    手机类：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        类名：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        手机(Phone)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        成员变量：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        品牌(brand)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        价格(price)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        成员方法：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        打电话(call)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        发短信(sendMessage)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public class Phone {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    //成员变量
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    String brand;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    int price;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    //成员方法
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    public void call() {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        System.out.println(&amp;#34;打电话&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    public void sendMessage() {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        System.out.println(&amp;#34;发短信&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;2对象如何使用&#34;&gt;2.对象如何使用
+&lt;/h2&gt;&lt;p&gt;创建格式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;类名 对象名 = new 类名（）；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;调用成员的格式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对象名.成员变量&lt;/li&gt;
+&lt;li&gt;对象名.成员方法（）；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3对象内存图&#34;&gt;3.对象内存图
+&lt;/h2&gt;&lt;h3 id=&#34;31-单个&#34;&gt;3.1 单个
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 此处内存相关的东西还有许多疑惑&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;什么是栈内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;什么是堆内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;什么是方法区&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;32-多个&#34;&gt;3.2 多个
+&lt;/h3&gt;&lt;h2 id=&#34;4成员变量和局部变量的区别&#34;&gt;4.成员变量和局部变量的区别
+&lt;/h2&gt;&lt;h2 id=&#34;5封装&#34;&gt;5.封装
+&lt;/h2&gt;&lt;p&gt;封装的意思就是对象代表什么，就得封装对应的数据，并且提供数据对应的行为（）&lt;/p&gt;
+&lt;p&gt;代码的实现：将类的信息隐藏，使得外部程序无法直接访问，但是可以通过事先定义好的方法来实现对应隐藏信息的操作和访问&lt;/p&gt;
+&lt;h3 id=&#34;private关键字&#34;&gt;private关键字
+&lt;/h3&gt;&lt;p&gt;它是一个修饰符，可以用来修饰成员（包括成员变量和成员方法）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被private修饰的成员，只能在本类之中继续访问，而这样的成员变量如果需要被其他类使用，可以用事先定义好的方法进行访问
+&lt;ul&gt;
+&lt;li&gt;提供get变量名（），获取成员变量的值，方法用public修饰&lt;/li&gt;
+&lt;li&gt;提供set变量名（参数），来设置值，注意对应的方法要用public修饰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;那么，与private对应的修饰符还有哪些呢baby&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;修饰符&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+          &lt;th&gt;大小&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;private&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;public&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;小问题&lt;/strong&gt;（static与这几个属于同一个类型嘛！！）&lt;/p&gt;
+&lt;h3 id=&#34;this关键字&#34;&gt;this关键字
+&lt;/h3&gt;&lt;p&gt;this修饰的变量用于指代成员变量，主要作用可以解决局部变量和成员变量的重名，this是就远原则，指代的是在往外一层的成员变量，而不是当前成员方法的形参&lt;/p&gt;
+&lt;h3 id=&#34;构造方法&#34;&gt;构造方法
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;概述&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;构造方法是一种特殊的方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;作用：创建对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;格式：&lt;/p&gt;
+&lt;p&gt;​	public class 类名 {&lt;/p&gt;
+&lt;p&gt;​		修饰符 类名（参数）{&lt;/p&gt;
+&lt;p&gt;​		}&lt;/p&gt;
+&lt;p&gt;​	}&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;功能：可以完成对象数据的初始化&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;注意事项&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​	主要默认用于生成对象的时候可以加上在括号里面加入参数进行数值的初始化&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Student s2 = new Student(&amp;#34;林青霞&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;而如果不专门自定义带参数的构造方法,则会默认使用无参的构造方法,可是一旦自定义了,再想使用无参的构造方法,就要专门定义一个无参的构造方法&lt;/p&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8包&#34;&gt;8.包
+&lt;/h2&gt;&lt;h3 id=&#34;什么是包&#34;&gt;&lt;strong&gt;什么是包？&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;说包你不认识，说package你总认识吧。&lt;/p&gt;
+&lt;p&gt;包就是文件夹，用来管理不同功能的java类。&lt;/p&gt;
+&lt;p&gt;（根据功能不同来进行分类）&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;包名命名的规则：&lt;/p&gt;
+&lt;p&gt;公司域名反写+包的作用，需要全部英文小写，见名知意&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;什么是全类名&lt;/p&gt;
+&lt;p&gt;包名+类名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;什么时候需要导包&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用同一个包中的类时，不需要导包&lt;/li&gt;
+&lt;li&gt;使用java.lang包中的类时，不需要导包&lt;/li&gt;
+&lt;li&gt;其他情况都需要导包&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;9权限修饰符&#34;&gt;9.权限修饰符
+&lt;/h2&gt;&lt;p&gt;哈哈哈，终于到了这里，虽然我是跳着写过来凑数的，但这都不重要。&lt;/p&gt;
+&lt;p&gt;所谓的权限修饰符在一开始接触java就能够看到，也就是所谓的public&lt;/p&gt;
+&lt;p&gt;，同时呢与之对应的还有private，protected，默认啥也不写。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;private（私房钱） &amp;lt; 默认（家里的钱） &amp;lt; protected（给私生子的钱） &amp;lt; public（所有地方都可以）&lt;/strong&gt;(作用范围：从小到大)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;public：&lt;/li&gt;
+&lt;li&gt;默认：本类以及本包之内可以访问（那么有bro要问了，什么是包，你且往上一节看啊bro）&lt;/li&gt;
+&lt;li&gt;protected：&lt;/li&gt;
+&lt;li&gt;private：私有的，只有当前类可以直接访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;10static关键词&#34;&gt;10.static关键词
+&lt;/h2&gt;&lt;h3 id=&#34;概述&#34;&gt;概述
+&lt;/h3&gt;&lt;p&gt;什么是static？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;java中的成员（变量和方法）等是存在所属性的，可以通过static关键词来识别&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被static修饰的成员是&lt;strong&gt;属于类的&lt;/strong&gt;放在静态区中&lt;/li&gt;
+&lt;li&gt;没有static修饰的成员变量和方法则是&lt;strong&gt;属于对象&lt;/strong&gt;的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;定义格式和使用&#34;&gt;定义格式和使用
+&lt;/h3&gt;&lt;p&gt;static是静态的意思，可以修饰成员变量或者方法。&lt;/p&gt;
+&lt;p&gt;有static修饰的成员变量属于类，可以称为&lt;strong&gt;类变量&lt;/strong&gt;或者&lt;strong&gt;静态成员变量&lt;/strong&gt;。可以直接用类名访问（）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;格式&lt;/strong&gt;：&lt;strong&gt;类名.静态变量&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;没有static修饰的成员变量属于每个对象，叫做&lt;strong&gt;实例变量&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;（实例成员变量属于每个对象，必须先定义各自类的对象之后才可以访问）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;格式&lt;/strong&gt;：&lt;strong&gt;对象.实例成员变量&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方法同理&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;static&lt;/code&gt;修饰成员时，该成员称为&lt;strong&gt;静态变量&lt;/strong&gt;或者&lt;strong&gt;静态方法&lt;/strong&gt;。该类的每个对象&lt;strong&gt;共享&lt;/strong&gt;同一个类的静态变量或者静态方法&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>stream流动方法引用</title>
+        <link>http://localhost:1313/p/stream%E6%B5%81%E5%8A%A8%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/</link>
+        <pubDate>Tue, 25 Nov 2025 16:31:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/stream%E6%B5%81%E5%8A%A8%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;不可变集合&#34;&gt;不可变集合
+&lt;/h1&gt;&lt;h2 id=&#34;1-概述&#34;&gt;1. 概述
+&lt;/h2&gt;&lt;p&gt;简单来说，就是不想让别人修改集合的内容。&lt;/p&gt;
+&lt;h2 id=&#34;2-分类&#34;&gt;2. 分类
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;不可变的list集合&lt;/li&gt;
+&lt;li&gt;不可变的set集合&lt;/li&gt;
+&lt;li&gt;不可变的map集合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3&#34;&gt;3.
+&lt;/h2&gt;&lt;h1 id=&#34;stream流&#34;&gt;Stream流
+&lt;/h1&gt;</description>
+        </item>
+        <item>
+        <title>方法</title>
+        <link>http://localhost:1313/p/%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Fri, 21 Nov 2025 14:07:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;h2 id=&#34;method-方法&#34;&gt;Method 方法
+&lt;/h2&gt;&lt;p&gt;方法就是程序之中最小的执行单元.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方法必须被定义之后才可以被调用&lt;/li&gt;
+&lt;li&gt;方法的运行需要手动使用,无法自动运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;方法的定义&#34;&gt;方法的定义
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;定义的格式&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public static void 方法名 (   ) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	// 方法体;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;调用的格式:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;method();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;带参数的方法&#34;&gt;带参数的方法
+&lt;/h3&gt;&lt;p&gt;注意&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方法定义时,参数中的数据类型和变量名一个都不能少,缺少任意一个程序就会报错&lt;/p&gt;
+&lt;p&gt;方法定义时,多个参数之间使用逗号进行分隔&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;有返回值的方法的定义和调用&#34;&gt;有返回值的方法的定义和调用
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;定义格式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;public static 数据类型 方法名 ( 参数 ) { 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	return 数据 ;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此处的数据类型和数据要对应哦,不然会报错的😗&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;方法的注意事项&#34;&gt;方法的注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;方法不能被嵌套定义&lt;/li&gt;
+&lt;li&gt;调用方法时的注意:
+&lt;ul&gt;
+&lt;li&gt;void类型的方法,直接调用就行&lt;/li&gt;
+&lt;li&gt;非void的方法,推荐用变量接收即可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;方法重载&#34;&gt;方法重载
+&lt;/h3&gt;&lt;p&gt;就是说,同一个类之中的不同的方法之间的联系,&lt;/p&gt;
+&lt;p&gt;前提条件:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多个方法在用一个类之中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多个方法具有相同的方法名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多个方法名的参数数量、类型和顺序的组合,只关心这三个&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果只有参数的名字不同,就不会构成重载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​					(但是返回值的数据类型没有影响)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;重载只针对方法的定义,但是不影响方法的调用&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>高级循环</title>
+        <link>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%BE%AA%E7%8E%AF/</link>
+        <pubDate>Fri, 21 Nov 2025 13:22:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%BE%AA%E7%8E%AF/</guid>
+        <description>&lt;h2 id=&#34;无限循环&#34;&gt;无限循环
+&lt;/h2&gt;&lt;h2 id=&#34;random&#34;&gt;Random
+&lt;/h2&gt;&lt;p&gt;他是一个类，不关心如何实现，知道怎么用就行&lt;/p&gt;
+&lt;h3 id=&#34;使用步骤&#34;&gt;使用步骤：
+&lt;/h3&gt;&lt;p&gt;1.导包&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;import java.util.Random;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;导包的动作必须出现在类定义的上边。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;2.创建对象&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Random r = new Random ();
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;上面这个格式里面，只有r是变量名，可以变，其他的都不允许变。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;3.生成随机数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;int number = r.nextInt(随机数的范围);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;上面这个格式里面，只有number是变量名，可以变，其他的都不允许变。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;随机数范围的特点：从0开始，不包含指定值。比如：参数为10，生成的范围[0,10)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;疑惑:nextInt是个啥?&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>数组</title>
+        <link>http://localhost:1313/p/%E6%95%B0%E7%BB%84/</link>
+        <pubDate>Fri, 21 Nov 2025 13:07:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%95%B0%E7%BB%84/</guid>
+        <description>&lt;h1 id=&#34;何为数组&#34;&gt;何为数组
+&lt;/h1&gt;&lt;h2 id=&#34;概念&#34;&gt;概念
+&lt;/h2&gt;&lt;p&gt;数组就是一种容器，可以用来存储同种数据类型的值。&lt;/p&gt;
+&lt;p&gt;注意考虑数组的数据类型和要存储的数据的数据类型是否匹配，如果不一样，再考虑一下隐式转换的问题。&lt;/p&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义
+&lt;/h2&gt;&lt;p&gt;格式一：&lt;/p&gt;
+&lt;p&gt;​	数据类型[] 数组名&lt;/p&gt;
+&lt;p&gt;格式二：&lt;/p&gt;
+&lt;p&gt;​	数据类型 数组名[]&lt;/p&gt;
+&lt;h2 id=&#34;数组的静态初始化&#34;&gt;数组的静态初始化
+&lt;/h2&gt;&lt;p&gt;完整格式：&lt;/p&gt;
+&lt;p&gt;​	数据类型[] 数组名 = new 数据类型[] {元素1， 元素2，元素3}；&lt;/p&gt;
+&lt;p&gt;注意点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;等号前后的数据类型必须保持一致。&lt;/li&gt;
+&lt;li&gt;数组一旦创建之后，长度不能发生变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;简化格式：&lt;/p&gt;
+&lt;p&gt;​	数据类型[] 数组名 = {    }；&lt;/p&gt;
+&lt;h2 id=&#34;地址值&#34;&gt;地址值
+&lt;/h2&gt;&lt;p&gt;使用sout打印数组时，实际出现的时数组的地址值（就是数组在内存中的位置）。&lt;/p&gt;
+&lt;p&gt;作用不大，简单了解即可。&lt;/p&gt;
+&lt;h2 id=&#34;数组元素访问&#34;&gt;数组元素访问
+&lt;/h2&gt;&lt;p&gt;格式：&lt;/p&gt;
+&lt;p&gt;​	数组名[索引]；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;获取数组中对应索引的值&lt;/li&gt;
+&lt;li&gt;修改索引的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;索引&#34;&gt;索引
+&lt;/h2&gt;&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;索引一定是从0开始的&lt;/li&gt;
+&lt;li&gt;连续不间断&lt;/li&gt;
+&lt;li&gt;逐个+1增长&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;数组的遍历&#34;&gt;数组的遍历
+&lt;/h2&gt;&lt;p&gt;数组的长度可以用  数组名.length  来表示&lt;/p&gt;
+&lt;h2 id=&#34;数组的动态初始化&#34;&gt;数组的动态初始化
+&lt;/h2&gt;&lt;p&gt;格式：&lt;/p&gt;
+&lt;p&gt;​	数据类型[] 数组名 = new 数据类型[数组的长度]；&lt;/p&gt;
+&lt;p&gt;（与静态初始化对比而言，在中括号中写出了数组的长度，同时没有对数组进行赋值，用以表明知道数量，而不知道具体值，系统会默认根据类型给出默认初始值）&lt;/p&gt;
+&lt;p&gt;整数类型：0&lt;/p&gt;
+&lt;p&gt;小数类型：0.0&lt;/p&gt;
+&lt;p&gt;布尔类型：false&lt;/p&gt;
+&lt;p&gt;字符类型：&amp;rsquo;\u0000&#39;&lt;/p&gt;
+&lt;p&gt;引用类型：null&lt;/p&gt;
+&lt;h2 id=&#34;两种初始化的区别&#34;&gt;两种初始化的区别
+&lt;/h2&gt;&lt;p&gt;静态：指定数组的元素&lt;/p&gt;
+&lt;p&gt;动态：指定数组的长度&lt;/p&gt;
+&lt;p&gt;（只明确数组长度但是不知道具体的数据，使用动态初始化）&lt;/p&gt;
+&lt;p&gt;（明确了所有要操作的数据，就要使用静态初始化）&lt;/p&gt;
+&lt;h2 id=&#34;数组常见问题&#34;&gt;数组常见问题
+&lt;/h2&gt;&lt;p&gt;ArrayIndexOutOfBoundsException索引越界异常&lt;/p&gt;
+&lt;p&gt;最小索引：0&lt;/p&gt;
+&lt;p&gt;最大索引：数组的长度-1   or   数组名.length-1&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>数据结构</title>
+        <link>http://localhost:1313/p/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+        <pubDate>Thu, 20 Nov 2025 22:46:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+        <description>&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;这个叫做java的语言真是有意思，相比于c语言麻烦的结构体指针数组造出来的复杂的各种数据结构，java似乎是直接封装好了在各种叫做集合的东西里，太伟大了！！！&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1概览&#34;&gt;1.概览
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;栈和队列
+&lt;ul&gt;
+&lt;li&gt;栈结构：先进后出&lt;/li&gt;
+&lt;li&gt;队列结构：先进先出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;数组和链表
+&lt;ul&gt;
+&lt;li&gt;数组：查询快、增删慢（数组使用过索引来进行查看的，查询快，但是如果增删则对整个的影响很大）&lt;/li&gt;
+&lt;li&gt;链表：查询慢、增删快（通过指针实现，增删修改对应的指针就可以，但是查询要挨个运行查看）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;哥们，等会儿尝试研究一下为什么这些东西会这样&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;java中的集合和数据结构的关系&#34;&gt;java中的集合和数据结构的关系
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ArrayList集合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是数组结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LinkedList集合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是链表结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TreeSet集合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是个啥&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HashSet集合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是哈希表，存取无序，不可以存储重复元素，没有索引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HashMap集合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是哈希表结构的&lt;/li&gt;
+&lt;li&gt;依赖hashCode方法和equals方法保证键的唯一&lt;/li&gt;
+&lt;li&gt;如果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TreeMap集合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;底层是红黑树结构&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;依赖自然排序或者比较器排序，对键进行排序&lt;/p&gt;
+&lt;p&gt;（啥是自然排序和比较器排序）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果不懂不懂&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意他说的lsit和set不可重复&lt;/p&gt;
+&lt;p&gt;Set的一个特点是不可以存储重复元素，而且没有索引，不可以使用普通for循环进行遍历&lt;/p&gt;
+&lt;p&gt;Map集合的特点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;双列集合，一个键对应一个值&lt;/li&gt;
+&lt;li&gt;键不可以重复，值可以重复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(&lt;strong&gt;瓦达西有点疑惑什么是值&lt;/strong&gt;)？？？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cDesktop%5cJava%e5%85%a5%e9%97%a8%5cday22-%e9%9b%86%e5%90%88%ef%bc%88List%e9%9b%86%e5%90%88%ef%bc%89%5c%e7%ac%94%e8%ae%b0%5cimg%5c01_%e9%9b%86%e5%90%88%e7%b1%bb%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84%e5%9b%be.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;01_集合类体系结构图&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2collection集合&#34;&gt;2.Collection集合
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;数组和集合的区别&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;相同点&lt;/p&gt;
+&lt;p&gt;都是容器（哎嘿，啥是&lt;strong&gt;容器&lt;/strong&gt;？？？）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不同点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数组的长度不可变，集合的长度可变&lt;/li&gt;
+&lt;li&gt;数组可以存储基本数据类型和引用数据类型
+&lt;ul&gt;
+&lt;li&gt;集合只可以存储引用数据类型，如果要存基础数据类型。需要存储对应的包装类（&lt;em&gt;&lt;strong&gt;xdm，何为基本，何为引用，何为包装类&lt;/strong&gt;&lt;/em&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c17772%5cDesktop%5cJava%e5%85%a5%e9%97%a8%5cday22-%e9%9b%86%e5%90%88%ef%bc%88List%e9%9b%86%e5%90%88%ef%bc%89%5c%e7%ac%94%e8%ae%b0%5cimg%5c01_%e9%9b%86%e5%90%88%e7%b1%bb%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84%e5%9b%be.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;01_集合类体系结构图&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;rt&lt;/strong&gt; ，这是集合类体系结构，可以分为单列集合Collection和双列集合Map&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Collection集合概述
+&lt;ul&gt;
+&lt;li&gt;是单列集合的顶层接口（&lt;strong&gt;什么是接口&lt;/strong&gt; ：🫣）它表示一组对象，这些对象也称为Collection的元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;创建Collection集合的对象
+&lt;ul&gt;
+&lt;li&gt;多态的方式（细嗦多态是什么？）&lt;/li&gt;
+&lt;li&gt;具体的实现类ArrayList（这是一种常见的父级类new子级类。我也不知道这种算不算正确的说法🤗(╰(&lt;em&gt;°▽°&lt;/em&gt;)╯）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Collection集合的常见方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3what-is-泛型&#34;&gt;3.what is 泛型
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;泛型定义格式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;类型&amp;gt;：指定一个类型的格式，尖括号里面可以任意书写，一般只写一个字母。例如：&lt;/li&gt;
+&lt;li&gt;&amp;lt;类型1，类型2&amp;gt;：指定多种类型的格式，多种类型之间用逗号隔开&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>异常</title>
+        <link>http://localhost:1313/p/%E5%BC%82%E5%B8%B8/</link>
+        <pubDate>Thu, 20 Nov 2025 19:37:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BC%82%E5%B8%B8/</guid>
+        <description>&lt;h2 id=&#34;什么是异常&#34;&gt;什么是异常
+&lt;/h2&gt;&lt;p&gt;异常&lt;/p&gt;
+&lt;p&gt;Throwable可以分为Error和Exception两个种类&lt;/p&gt;
+&lt;p&gt;Error：严重错误Error，无法通过处理的错误&lt;/p&gt;
+&lt;p&gt;Exception：表示异常，分为编译时期异常checked和运行时期异常					  runtime，&lt;/p&gt;
+&lt;p&gt;在java中的关键字：throw&lt;/p&gt;
+&lt;h3 id=&#34;疑惑异常怎么分类的抛出的的异常类型是怎么决定的&#34;&gt;疑惑：异常怎么分类的，抛出的的异常类型是怎么决定的
+&lt;/h3&gt;&lt;p&gt;**没错没错 ** &lt;em&gt;这就是我的疑惑&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;FileNotFoundException&lt;/p&gt;
+&lt;p&gt;比如这样的异常类型&lt;/p&gt;
+&lt;p&gt;似乎是可以自定义也可以通过使用现成的类型&lt;/p&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;什么是抛出异常throw&#34;&gt;什么是抛出异常throw
+&lt;/h3&gt;&lt;p&gt;具体应该如何操作呢？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个异常对象&lt;/li&gt;
+&lt;li&gt;提前告知传递给调用者&lt;/li&gt;
+&lt;li&gt;throw使用在方法之中，用来抛出一个异常对象，并结束当前方法的执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;捕获异常try--catch&#34;&gt;捕获异常try  catch
+&lt;/h3&gt;&lt;p&gt;介绍&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;该方法不处理，而是声明抛出，由调用者自己来处理&lt;/li&gt;
+&lt;li&gt;在方法中使用try-catch的语句块来处理异常&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;finally代码块&#34;&gt;finally代码块
+&lt;/h3&gt;&lt;p&gt;finally中存储的代码块一定会被执行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;finally不能够单独使用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;异常注意事项&#34;&gt;异常注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;运行时异常被抛出可以不处理，就是不捕获也不声明抛出。&lt;/li&gt;
+&lt;li&gt;如果父类抛出了多个异常，子类覆盖父类方法时。只能抛出相同的异常或者是他的子集。&lt;/li&gt;
+&lt;li&gt;父类方法没有抛出异常，子类覆盖父类该方法时也不可抛出异常。此时子类产生该异常，只能捕获处理，不能声明抛出。&lt;/li&gt;
+&lt;li&gt;当多异常处理时。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;概述&#34;&gt;概述
+&lt;/h3&gt;&lt;h5 id=&#34;为什么需要自定义异常类&#34;&gt;为什么需要自定义异常类:
+&lt;/h5&gt;</description>
+        </item>
+        <item>
+        <title>阶段项目</title>
+        <link>http://localhost:1313/p/%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE/</link>
+        <pubDate>Thu, 20 Nov 2025 19:31:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE/</guid>
+        <description>&lt;h1 id=&#34;阶段项目&#34;&gt;阶段项目
+&lt;/h1&gt;&lt;h2 id=&#34;1主界面搭建&#34;&gt;1.主界面搭建
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//1.召唤主界面&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;JFrame&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jFrame&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;JFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//2.设置主界面的大小&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;514&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;595&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//3.让主界面显示出来&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setVisible&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;2主界面的其他设置&#34;&gt;2.主界面的其他设置
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;jFrame.setVisible(true);必须写在最后一行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3利用继承简化代码&#34;&gt;3.利用继承简化代码
+&lt;/h2&gt;&lt;p&gt;​		通过继承来将界面分为注册界面，登录界面和主界面。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4菜单制作&#34;&gt;4.菜单制作
+&lt;/h2&gt;&lt;p&gt;​		在菜单中有：JMenuBar、JMenu、JMenuItem三个角色。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JMenuBar：如上图中红色边框&lt;/li&gt;
+&lt;li&gt;JMenu：如上图蓝色边框&lt;/li&gt;
+&lt;li&gt;JMenuItem：如上图绿色字体处&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中JMenuBar是整体，一个界面中一般只有一个JMenuBar。&lt;/p&gt;
+&lt;p&gt;而JMenu是菜单中的选项，可以有多个。&lt;/p&gt;
+&lt;p&gt;JMenuItem是选项下面的条目，也可以有多个。&lt;/p&gt;
+&lt;h4 id=&#34;书写步骤&#34;&gt;书写步骤
+&lt;/h4&gt;&lt;p&gt;1，创建JMenuBar对象&lt;/p&gt;
+&lt;p&gt;2，创建JMenu对象&lt;/p&gt;
+&lt;p&gt;3，创建JMenuItem对象&lt;/p&gt;
+&lt;p&gt;4，把JMenuItem添加到JMenu中&lt;/p&gt;
+&lt;p&gt;5，把JMenu添加到JMenuBar中&lt;/p&gt;
+&lt;p&gt;6，把整个JMenuBar设置到整个界面中&lt;/p&gt;
+&lt;h2 id=&#34;5添加图片&#34;&gt;5.添加图片
+&lt;/h2&gt;&lt;p&gt;使用到的java类有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ImageIcon：描述图片的类。可以关联计算机中任意位置的图片&lt;/li&gt;
+&lt;li&gt;JLabel：用来管理图片，文字的类。用来设置位置，宽高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;p&gt;​	1，取消整个界面的默认居中布局&lt;/p&gt;
+&lt;p&gt;​	2，创建ImageIcon对象，并制定图片位置。&lt;/p&gt;
+&lt;p&gt;​	3，创建JLabel对象，并把ImageIcon对象放到小括号中。&lt;/p&gt;
+&lt;p&gt;​	4，利用JLabel对象设置大小，宽高。&lt;/p&gt;
+&lt;p&gt;​	5，将JLabel对象添加到整个界面当中。&lt;/p&gt;
+&lt;h2 id=&#34;6打乱图片的位置&#34;&gt;6.打乱图片的位置
+&lt;/h2&gt;&lt;p&gt;重点如何通过random类来进行随机打乱&lt;/p&gt;
+&lt;h2 id=&#34;7事件&#34;&gt;7.事件
+&lt;/h2&gt;&lt;p&gt;事件是可以被组件识别的操作（&lt;em&gt;那么，古尔丹，什么是组件呢？&lt;/em&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;常见的三个核心要素&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事件源&lt;/li&gt;
+&lt;li&gt;事件&lt;/li&gt;
+&lt;li&gt;绑定监听&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;常见的三种事件监听&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;键盘监听 KeyListener&lt;/li&gt;
+&lt;li&gt;鼠标监听 MouseListener&lt;/li&gt;
+&lt;li&gt;动作监听 ActionListener&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;动作监听&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;鼠标左键点击&lt;/li&gt;
+&lt;li&gt;空格&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;事件的三种实现方式&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义实现类实现接口&lt;/li&gt;
+&lt;li&gt;匿名内部类&lt;/li&gt;
+&lt;li&gt;本类实现接口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（heyhey，再次提问&lt;strong&gt;上面三个名词都是什么东西呢？&lt;/strong&gt;）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>io流</title>
+        <link>http://localhost:1313/p/io%E6%B5%81/</link>
+        <pubDate>Thu, 20 Nov 2025 18:42:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/io%E6%B5%81/</guid>
+        <description>&lt;h2 id=&#34;io流&#34;&gt;io流
+&lt;/h2&gt;&lt;h3 id=&#34;q什么是io流&#34;&gt;Q：什么是io流？
+&lt;/h3&gt;&lt;p&gt;A：存储和读取数据的解决方案&lt;/p&gt;
+&lt;h3 id=&#34;q-io流的作用&#34;&gt;Q: io流的作用
+&lt;/h3&gt;&lt;p&gt;A：用于读写数据（本地文件，网络）&lt;/p&gt;
+&lt;h3 id=&#34;io流的体系结构&#34;&gt;io流的体系结构
+&lt;/h3&gt;&lt;p&gt;​		io流可以分为输入流和输出流，也可以分为字节流和字符流。&lt;/p&gt;
+&lt;p&gt;字节流输出流有OutputStream&lt;/p&gt;
+&lt;p&gt;一、io流的概述&lt;/p&gt;
+&lt;p&gt;​		注意字节流可以操纵所有类型的文件，字符流只可以操纵纯文本文件&lt;/p&gt;
+&lt;p&gt;二、io流的体系和字节输出流的基本用法&lt;/p&gt;
+&lt;p&gt;​		FileOutputStream可以把程序中的数据写入文本之中，同时默认使用ASCII编码进行输出，可以使用强类型转换来直接输出，如果想要实现同一行输出的效果，可以使用print而不是println。&lt;/p&gt;
+&lt;p&gt;​		最后要注意用&lt;code&gt;fos.close&lt;/code&gt;来进行资源的释放，避免占用系统的进程。&lt;/p&gt;
+&lt;p&gt;三、字节输出流写出数据的细节&lt;/p&gt;
+&lt;p&gt;​		创建字节输出流对象的时候：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果参数是字符串表示的路径或者是File对象都可以&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果文件不存在则会自动创建一个新的文件，但是要保证父级路径存在&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;四、字节输出流写出数据的三种方式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;off&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;五、换行和续写&lt;/p&gt;
+&lt;p&gt;​		换行：采用\r\n，延续老式打字机的先回车再换行的传统&lt;/p&gt;
+&lt;p&gt;​		续写：如果想要打开续写，则再创建对象时候在第二个参数处写true，如果不写的话则会默认显示false&lt;/p&gt;
+&lt;p&gt;六、字节输入流的基本写法&lt;/p&gt;
+&lt;p&gt;七、字节输入流读取数据的细节&lt;/p&gt;
+&lt;p&gt;八、字节输入流的循环读取&lt;/p&gt;
+&lt;p&gt;九、文件拷贝的基本代码&lt;/p&gt;
+&lt;p&gt;十、文件拷贝的弊端和解决方案&lt;/p&gt;
+&lt;p&gt;十一、文件拷贝改写&lt;/p&gt;
+&lt;p&gt;十二、io流中不同jdk版本捕获异常的&lt;/p&gt;
+&lt;p&gt;十三、字符集详解&lt;/p&gt;
+&lt;p&gt;十四、同上（Unicode）&lt;/p&gt;
+&lt;p&gt;十五、为什么会有乱码&lt;/p&gt;
+&lt;p&gt;十六、Java中编码和解码的代码实现&lt;/p&gt;
+&lt;p&gt;十七、&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>归档</title>
+        <link>http://localhost:1313/archives/</link>
+        <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>关于</title>
+        <link>http://localhost:1313/%E5%85%B3%E4%BA%8E/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/%E5%85%B3%E4%BA%8E/</guid>
+        <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>链接</title>
+        <link>http://localhost:1313/%E9%93%BE%E6%8E%A5/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/%E9%93%BE%E6%8E%A5/</guid>
+        <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
+&lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;GitHub&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;GitHub is the world&amp;#39;s largest software development platform.&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;website&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;https://github.com&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;TypeScript&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;website&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;https://www.typescriptlang.org&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;ts-logo-128.jpg&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;image&lt;/code&gt; field accepts both local and external images.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>搜索</title>
+        <link>http://localhost:1313/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
