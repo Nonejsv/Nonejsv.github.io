@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>JUC on Nonejsv-孙</title>
+        <link>http://localhost:1313/categories/juc/</link>
+        <description>Recent content in JUC on Nonejsv-孙</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Nonejsv-sun</copyright>
+        <lastBuildDate>Sat, 06 Dec 2025 11:26:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/juc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>并发编程</title>
+        <link>http://localhost:1313/p/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+        <pubDate>Sat, 06 Dec 2025 11:26:03 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;并发编程&#34;&gt;并发编程
+&lt;/h1&gt;&lt;h2 id=&#34;1概览&#34;&gt;1.概览
+&lt;/h2&gt;&lt;p&gt;加下来记录的笔记中所谓的【并发】涵盖了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;进程&lt;/li&gt;
+&lt;li&gt;线程&lt;/li&gt;
+&lt;li&gt;并发&lt;/li&gt;
+&lt;li&gt;并行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以及java开发工具、并发问题以及解决方案，同时一些其他领域的并发。&lt;/p&gt;
+&lt;h2 id=&#34;2进程和线程&#34;&gt;2.进程和线程
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;进程&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

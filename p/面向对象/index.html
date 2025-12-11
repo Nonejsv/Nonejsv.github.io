@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1.类和对象 如何理解\n简单描述来说的话，类是抽象的对象，而对象则是具象的类。\n类是对象的数据类型。类是由属性和行为两个部分组成的\n属性：在类中通过成员变量来体现 成员变量是什么（类之中方法之外的变量就是成员变量） 行为：在类中通过成员方法来体现 成员方法是什么：（相比于常见的方法要去掉static关键词即可） 哈哈，那么static又是什么呢：此事在面向对象进阶之中亦有记载，这里简单说明一下有无static修饰的区别在于是否独独属于这个对象还是整个类，会在进阶内仔细研究，Cialiao~ 属性是事物的特征，以学生为例子，性别年龄身高体重\n">
+<title>面向对象</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.9e26333e0e4cbcd17e347c28bc55cec7b74a77458da2f67f750e2791f0ab5fc2.css"><meta property='og:title' content="面向对象">
+<meta property='og:description' content="1.类和对象 如何理解\n简单描述来说的话，类是抽象的对象，而对象则是具象的类。\n类是对象的数据类型。类是由属性和行为两个部分组成的\n属性：在类中通过成员变量来体现 成员变量是什么（类之中方法之外的变量就是成员变量） 行为：在类中通过成员方法来体现 成员方法是什么：（相比于常见的方法要去掉static关键词即可） 哈哈，那么static又是什么呢：此事在面向对象进阶之中亦有记载，这里简单说明一下有无static修饰的区别在于是否独独属于这个对象还是整个类，会在进阶内仔细研究，Cialiao~ 属性是事物的特征，以学生为例子，性别年龄身高体重\n">
+<meta property='og:url' content='http://localhost:1313/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/'>
+<meta property='og:site_name' content='Nonejsv-孙'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-25T23:26:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-25T23:26:00&#43;00:00'/>
+<meta name="twitter:title" content="面向对象">
+<meta name="twitter:description" content="1.类和对象 如何理解\n简单描述来说的话，类是抽象的对象，而对象则是具象的类。\n类是对象的数据类型。类是由属性和行为两个部分组成的\n属性：在类中通过成员变量来体现 成员变量是什么（类之中方法之外的变量就是成员变量） 行为：在类中通过成员方法来体现 成员方法是什么：（相比于常见的方法要去掉static关键词即可） 哈哈，那么static又是什么呢：此事在面向对象进阶之中亦有记载，这里简单说明一下有无static修饰的区别在于是否独独属于这个对象还是整个类，会在进阶内仔细研究，Cialiao~ 属性是事物的特征，以学生为例子，性别年龄身高体重\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/001_hu_1671c03090bcb588.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nonejsv-孙</a></h1>
+            <h2 class="site-description">欢迎来到我的博客，主要分享个人生活和学习笔记。</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Nonejsv'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/en/" >English</option>
+                                
+                                    <option value="http://localhost:1313/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>切换主题</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1类和对象">1.类和对象</a></li>
+    <li><a href="#2对象如何使用">2.对象如何使用</a></li>
+    <li><a href="#3对象内存图">3.对象内存图</a>
+      <ol>
+        <li><a href="#31-单个">3.1 单个</a></li>
+        <li><a href="#32-多个">3.2 多个</a></li>
+      </ol>
+    </li>
+    <li><a href="#4成员变量和局部变量的区别">4.成员变量和局部变量的区别</a></li>
+    <li><a href="#5封装">5.封装</a>
+      <ol>
+        <li><a href="#private关键字">private关键字</a></li>
+        <li><a href="#this关键字">this关键字</a></li>
+        <li><a href="#构造方法">构造方法</a></li>
+        <li><a href="#构造器">构造器</a></li>
+        <li><a href="#标准javabean类">标准javabean类</a></li>
+      </ol>
+    </li>
+    <li><a href="#8包">8.包</a>
+      <ol>
+        <li><a href="#什么是包"><strong>什么是包？</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#9权限修饰符">9.权限修饰符</a></li>
+    <li><a href="#10static关键词">10.static关键词</a>
+      <ol>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#定义格式和使用">定义格式和使用</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-11-25T23:26:00Z'>2025-11-25</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="1类和对象">1.类和对象
+</h2><p><strong>如何理解</strong></p>
+<p>简单描述来说的话，类是抽象的对象，而对象则是具象的类。</p>
+<p>类是对象的数据类型。类是由属性和行为两个部分组成的</p>
+<ul>
+<li>属性：在类中通过<strong>成员变量</strong>来体现
+<ul>
+<li><em>成员变量是什么</em>（类之中方法之外的变量就是成员变量）</li>
+</ul>
+</li>
+<li>行为：在类中通过<strong>成员方法</strong>来体现
+<ul>
+<li><em>成员方法是什么</em>：（相比于常见的方法要去掉static关键词即可）
+<ul>
+<li><strong>哈哈</strong>，那么static又是什么呢：此事在<strong>面向对象进阶</strong>之中亦有记载，这里简单说明一下有无static修饰的区别在于是否独独属于这个对象还是整个类，会在进阶内仔细研究，Cialiao~</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>属性是事物的特征，以学生为例子，性别年龄身高体重</p>
+<p>行为是事物能执行的操作，重点在于事物自身，比如人开门则是门的行为。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class 类名 {
+</span></span><span class="line"><span class="cl">	// 成员变量
+</span></span><span class="line"><span class="cl">	变量1的数据类型 变量1；
+</span></span><span class="line"><span class="cl">	变量2的数据类型 变量2;
+</span></span><span class="line"><span class="cl">	…
+</span></span><span class="line"><span class="cl">	// 成员方法
+</span></span><span class="line"><span class="cl">	方法1;
+</span></span><span class="line"><span class="cl">	方法2;	
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    手机类：
+</span></span><span class="line"><span class="cl">        类名：
+</span></span><span class="line"><span class="cl">        手机(Phone)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        成员变量：
+</span></span><span class="line"><span class="cl">        品牌(brand)
+</span></span><span class="line"><span class="cl">        价格(price)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        成员方法：
+</span></span><span class="line"><span class="cl">        打电话(call)
+</span></span><span class="line"><span class="cl">        发短信(sendMessage)
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">public class Phone {
+</span></span><span class="line"><span class="cl">    //成员变量
+</span></span><span class="line"><span class="cl">    String brand;
+</span></span><span class="line"><span class="cl">    int price;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    //成员方法
+</span></span><span class="line"><span class="cl">    public void call() {
+</span></span><span class="line"><span class="cl">        System.out.println(&#34;打电话&#34;);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public void sendMessage() {
+</span></span><span class="line"><span class="cl">        System.out.println(&#34;发短信&#34;);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2对象如何使用">2.对象如何使用
+</h2><p>创建格式：</p>
+<ul>
+<li>类名 对象名 = new 类名（）；</li>
+</ul>
+<p>调用成员的格式：</p>
+<ul>
+<li>对象名.成员变量</li>
+<li>对象名.成员方法（）；</li>
+</ul>
+<hr>
+<h2 id="3对象内存图">3.对象内存图
+</h2><h3 id="31-单个">3.1 单个
+</h3><ul>
+<li>
+<p><input disabled="" type="checkbox"> 此处内存相关的东西还有许多疑惑</p>
+</li>
+<li>
+<p>什么是栈内存</p>
+</li>
+<li>
+<p>什么是堆内存</p>
+</li>
+<li>
+<p>什么是方法区</p>
+</li>
+</ul>
+<h3 id="32-多个">3.2 多个
+</h3><h2 id="4成员变量和局部变量的区别">4.成员变量和局部变量的区别
+</h2><h2 id="5封装">5.封装
+</h2><p>封装的意思就是对象代表什么，就得封装对应的数据，并且提供数据对应的行为（）</p>
+<p>代码的实现：将类的信息隐藏，使得外部程序无法直接访问，但是可以通过事先定义好的方法来实现对应隐藏信息的操作和访问</p>
+<h3 id="private关键字">private关键字
+</h3><p>它是一个修饰符，可以用来修饰成员（包括成员变量和成员方法）</p>
+<ul>
+<li>被private修饰的成员，只能在本类之中继续访问，而这样的成员变量如果需要被其他类使用，可以用事先定义好的方法进行访问
+<ul>
+<li>提供get变量名（），获取成员变量的值，方法用public修饰</li>
+<li>提供set变量名（参数），来设置值，注意对应的方法要用public修饰</li>
+</ul>
+</li>
+</ul>
+<p><strong>那么，与private对应的修饰符还有哪些呢baby</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>修饰符</th>
+          <th>作用</th>
+          <th>大小</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>private</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>public</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>小问题</strong>（static与这几个属于同一个类型嘛！！）</p>
+<h3 id="this关键字">this关键字
+</h3><p>this修饰的变量用于指代成员变量，主要作用可以解决局部变量和成员变量的重名，this是就远原则，指代的是在往外一层的成员变量，而不是当前成员方法的形参</p>
+<h3 id="构造方法">构造方法
+</h3><p><strong>概述</strong></p>
+<p>构造方法是一种特殊的方法</p>
+<ul>
+<li>
+<p>作用：创建对象</p>
+</li>
+<li>
+<p>格式：</p>
+<p>​	public class 类名 {</p>
+<p>​		修饰符 类名（参数）{</p>
+<p>​		}</p>
+<p>​	}</p>
+</li>
+<li>
+<p>功能：可以完成对象数据的初始化</p>
+</li>
+</ul>
+<p><strong>注意事项</strong></p>
+<p>​	主要默认用于生成对象的时候可以加上在括号里面加入参数进行数值的初始化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Student s2 = new Student(&#34;林青霞&#34;);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>而如果不专门自定义带参数的构造方法,则会默认使用无参的构造方法,可是一旦自定义了,再想使用无参的构造方法,就要专门定义一个无参的构造方法</p>
+<h3 id="构造器">构造器
+</h3><h3 id="标准javabean类">标准javabean类
+</h3><hr>
+<hr>
+<h2 id="8包">8.包
+</h2><h3 id="什么是包"><strong>什么是包？</strong>
+</h3><p>说包你不认识，说package你总认识吧。</p>
+<p>包就是文件夹，用来管理不同功能的java类。</p>
+<p>（根据功能不同来进行分类）</p>
+<ol start="2">
+<li>
+<p>包名命名的规则：</p>
+<p>公司域名反写+包的作用，需要全部英文小写，见名知意</p>
+</li>
+<li>
+<p>什么是全类名</p>
+<p>包名+类名</p>
+</li>
+<li>
+<p>什么时候需要导包</p>
+<ul>
+<li>使用同一个包中的类时，不需要导包</li>
+<li>使用java.lang包中的类时，不需要导包</li>
+<li>其他情况都需要导包</li>
+<li></li>
+</ul>
+</li>
+</ol>
+<h2 id="9权限修饰符">9.权限修饰符
+</h2><p>哈哈哈，终于到了这里，虽然我是跳着写过来凑数的，但这都不重要。</p>
+<p>所谓的权限修饰符在一开始接触java就能够看到，也就是所谓的public</p>
+<p>，同时呢与之对应的还有private，protected，默认啥也不写。</p>
+<p><strong>private（私房钱） &lt; 默认（家里的钱） &lt; protected（给私生子的钱） &lt; public（所有地方都可以）</strong>(作用范围：从小到大)</p>
+<ul>
+<li>public：</li>
+<li>默认：本类以及本包之内可以访问（那么有bro要问了，什么是包，你且往上一节看啊bro）</li>
+<li>protected：</li>
+<li>private：私有的，只有当前类可以直接访问</li>
+</ul>
+<h2 id="10static关键词">10.static关键词
+</h2><h3 id="概述">概述
+</h3><p>什么是static？</p>
+<p><strong>java中的成员（变量和方法）等是存在所属性的，可以通过static关键词来识别</strong>。</p>
+<ul>
+<li>被static修饰的成员是<strong>属于类的</strong>放在静态区中</li>
+<li>没有static修饰的成员变量和方法则是<strong>属于对象</strong>的</li>
+</ul>
+<h3 id="定义格式和使用">定义格式和使用
+</h3><p>static是静态的意思，可以修饰成员变量或者方法。</p>
+<p>有static修饰的成员变量属于类，可以称为<strong>类变量</strong>或者<strong>静态成员变量</strong>。可以直接用类名访问（）</p>
+<p><strong>格式</strong>：<strong>类名.静态变量</strong></p>
+<p>没有static修饰的成员变量属于每个对象，叫做<strong>实例变量</strong>。</p>
+<p>（实例成员变量属于每个对象，必须先定义各自类的对象之后才可以访问）</p>
+<p><strong>格式</strong>：<strong>对象.实例成员变量</strong></p>
+<blockquote>
+<p>方法同理</p>
+</blockquote>
+<h3 id="小结">小结
+</h3><ol>
+<li><code>static</code>修饰成员时，该成员称为<strong>静态变量</strong>或者<strong>静态方法</strong>。该类的每个对象<strong>共享</strong>同一个类的静态变量或者静态方法</li>
+<li></li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nonejsv-sun
+    </section>
+    
+    
+
+         
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.813bad6beeddf7b1b77b9b310c12e4750ca7ee2261912c07b883dbfb85f40fa1.js" defer></script><script type="text/javascript" src="/ts/custom.8361509b3cd938473657be612583719c66260e9dd2258b6c17fee51592310193.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="总览 内容：\nspringBoot入门 http协议 springboot案例 分层解耦 静态资源：指的是存储在服务器上面不会改变的数据，不会根据用户的请求而改编\n">
+<title>后端基础</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.9e26333e0e4cbcd17e347c28bc55cec7b74a77458da2f67f750e2791f0ab5fc2.css"><meta property='og:title' content="后端基础">
+<meta property='og:description' content="总览 内容：\nspringBoot入门 http协议 springboot案例 分层解耦 静态资源：指的是存储在服务器上面不会改变的数据，不会根据用户的请求而改编\n">
+<meta property='og:url' content='http://localhost:1313/p/%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/'>
+<meta property='og:site_name' content='Nonejsv-孙'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JavaWeb' /><meta property='article:tag' content='Web后端基础' /><meta property='article:published_time' content='2025-12-03T09:51:13&#43;08:00'/><meta property='article:modified_time' content='2025-12-03T09:51:13&#43;08:00'/>
+<meta name="twitter:title" content="后端基础">
+<meta name="twitter:description" content="总览 内容：\nspringBoot入门 http协议 springboot案例 分层解耦 静态资源：指的是存储在服务器上面不会改变的数据，不会根据用户的请求而改编\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/001_hu_1671c03090bcb588.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nonejsv-孙</a></h1>
+            <h2 class="site-description">欢迎来到我的博客，主要分享个人生活和学习笔记。</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Nonejsv'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/en/" >English</option>
+                                
+                                    <option value="http://localhost:1313/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>切换主题</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#入门程序">入门程序</a></li>
+    <li><a href="#入门解析">入门解析</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#特点">特点</a></li>
+    <li><a href="#http请求协议">http请求协议</a>
+      <ol>
+        <li><a href="#介绍-1">介绍：</a>
+          <ol>
+            <li><a href="#get方式的请求协议">get方式的请求协议</a></li>
+            <li><a href="#post方式的请求协议">post方式的请求协议</a></li>
+            <li><a href="#两者的区别">两者的区别：</a></li>
+            <li><a href="#获取请求数据">获取请求数据</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#http响应协议">http响应协议</a>
+      <ol>
+        <li><a href="#格式介绍">格式介绍：</a></li>
+        <li><a href="#响应状态码">响应状态码</a></li>
+        <li><a href="#设置响应数据">设置响应数据</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#41-三层架构">4.1 三层架构</a>
+      <ol>
+        <li><a href="#411-介绍">4.1.1 介绍</a></li>
+        <li><a href="#41-2-代码实现">4.1. 2 代码实现</a></li>
+      </ol>
+    </li>
+    <li><a href="#42-分层解耦">4.2 分层解耦</a></li>
+    <li><a href="#43-iocdi入门">4.3 IOC&amp;DI入门</a></li>
+    <li><a href="#44-ioc详解">4.4 IOC详解</a></li>
+    <li><a href="#45-di详解">4.5 DI详解</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >
+                学习笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/">后端基础</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-03T09:51:13&#43;08:00'>2025-12-03</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="总览">总览
+</h1><p>内容：</p>
+<ul>
+<li>springBoot入门</li>
+<li>http协议</li>
+<li>springboot案例</li>
+<li>分层解耦</li>
+</ul>
+<blockquote>
+<p>静态资源：指的是存储在服务器上面不会改变的数据，不会根据用户的请求而改编</p>
+<p>动态资源：内容可能在每次额度请求时发生变化，动态生成的</p>
+</blockquote>
+<p><img src="/typora-user-images/image-20251203095601431.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203095601431"
+	
+	
+></p>
+<p>对于java程序开发的动态资源来说，我们通常会部署在Tomcat这样的服务器上运行，而浏览器与服务器通信的时候，基本都是基于http协议的。</p>
+<p>俗称BS架构</p>
+<p>与之对应的是CS架构。</p>
+<h1 id="1-springboot入门">1. springBoot入门
+</h1><h2 id="介绍">介绍
+</h2><p>在spring家族中最基础核心的技术就是springframework，可以提供很多实用的功能，比如：<strong>依赖注入、事务管理、web开发支持、数据访问、消息服务</strong>等等。</p>
+<p>但是由于直接使用springframework比较繁琐复杂，我们可以先通过另一个项目springboot来帮助我们快速构建应用程序。</p>
+<p>对比：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>springframework</th>
+          <th>springboot</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>配置繁琐、入门难度大</td>
+          <td>简化配置、快速开发</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>Spring Boot 可以帮助我们非常快速的构建应用程序、简化开发、提高效率 。</strong></p>
+<p><strong>而直接基于SpringBoot进行项目构建和开发，不仅是Spring官方推荐的方式，也是现在企业开发的主流。</strong></p>
+<h2 id="入门程序">入门程序
+</h2><p>常见问题：</p>
+<ol>
+<li>
+<p>网络连接问题</p>
+<p>​	使用阿里云提供的脚手架，网址为：https://start.aliyun.com</p>
+</li>
+</ol>
+<h2 id="入门解析">入门解析
+</h2><ol>
+<li>
+<p>为什么springboot项目里面一个main方法就可以启动web应用？</p>
+<p>因为我们在创建springboot项目的时候，选择了web开发的<strong>起步依赖</strong> <code>spring-boot-starter-web</code>。而<code>spring-boot-starter-web</code>依赖，又依赖了<code>spring-boot-starter-tomcat</code>，由于maven的依赖传递特性，那么在我们创建的springboot项目中也就已经有了tomcat的依赖，这个其实就是springboot中内嵌的tomcat。</p>
+</li>
+</ol>
+<p><img src="/typora-user-images/image-20251203100649483.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203100649483"
+	
+	
+></p>
+<p>在我们运行main方法的时候，启动的就是springboot内嵌的Tomcat服务器，我们开发的项目会自动部署在tomcat服务器里面，默认占用8080端口号。</p>
+<p><img src="/typora-user-images/image-20251203100755285.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203100755285"
+	
+	
+></p>
+<blockquote>
+<p>😗起步依赖：</p>
+<ul>
+<li>一种为开发者提供简化配置和集成的机制，就是让开发者可以更加轻松地构建spring应用程序。</li>
+</ul>
+</blockquote>
+<h1 id="2-http协议">2. http协议
+</h1><h2 id="概述">概述
+</h2><p><img src="/typora-user-images/image-20251203100950567.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203100950567"
+	
+	
+></p>
+<p>hyper text transfer protocol（超文本传输协议），规定了浏览器与服务器之前传输数据的规则。</p>
+<p>浏览器向服务器发出请求：</p>
+<p><img src="/typora-user-images/image-20251203101202050.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203101202050"
+	
+	
+></p>
+<p>服务器向浏览器发出响应：</p>
+<p><img src="/typora-user-images/image-20251203101211570.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203101211570"
+	
+	
+></p>
+<p><strong>两者都要按照固定格式解析</strong></p>
+<p>今天我们学习的http协议，就是来学习请求和响应数据的具体格式内容。</p>
+<h2 id="特点">特点
+</h2><ul>
+<li>基于TCP协议：安全，面向连接
+<ul>
+<li>**TCP是一种面向连接的（建立连接之前需要经过三次握手）、可靠的、基于字节流的传输层通信协议、在数据传输方面更加安全</li>
+</ul>
+</li>
+</ul>
+<p>（啥是tcp，啥事udp😵）</p>
+<ul>
+<li>基于请求-响应模型：一次请求对应一次响应（先请求后响应）</li>
+</ul>
+<p>没有请求就没有响应，一一对应</p>
+<ul>
+<li>http协议是无状态协议，每次的请求-响应都是独立的，没有记忆能力
+<ul>
+<li>优点：速度快</li>
+<li>缺点：多次请求之间无法共享数据（比如添加商品到购物车，不进行处理会默认没有记录添加购物车的是什么商品）
+<ul>
+<li>但是java已经提出了使用**会话技术（Cookie，Session）**来进行解决(wa,好开心，又能学到新的知识了，以后会提到)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="http请求协议">http请求协议
+</h2><h3 id="介绍-1">介绍：
+</h3><p>请求协议：</p>
+<p>浏览器将数据以请求格式发送到服务器。</p>
+<p>包括：<strong>请求行，请求头，请求体</strong></p>
+<h4 id="get方式的请求协议">get方式的请求协议
+</h4><p><img src="/typora-user-images/image-20251203102017104.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203102017104"
+	
+	
+></p>
+<p>格式：</p>
+<ul>
+<li>请求行
+*</li>
+<li>请求头</li>
+</ul>
+<h4 id="post方式的请求协议">post方式的请求协议
+</h4><p><img src="/typora-user-images/image-20251203102204524.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203102204524"
+	
+	
+></p>
+<h4 id="两者的区别">两者的区别：
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>区别方式</th>
+          <th>get请求</th>
+          <th>post请求</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>请求参数</td>
+          <td>请求参数在请求行中</td>
+          <td>清切参数在请求体中</td>
+      </tr>
+      <tr>
+          <td>请求参数长度</td>
+          <td>长度有限制</td>
+          <td>长度没有限制</td>
+      </tr>
+      <tr>
+          <td>安全性</td>
+          <td>安全性低，请求参数暴露在浏览器地址栏中</td>
+          <td>安全性相对高</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="获取请求数据">获取请求数据
+</h4><p><img src="/typora-user-images/image-20251203102743555.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203102743555"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RestController</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestController</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 请求路径 http://localhost:8080/request?name=Tom&amp;age=18
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param request
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/request&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">request</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.获取请求参数 name, age</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&#34;age&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;name = &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;, age = &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">age</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.获取请求路径</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getRequestURI</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getRequestURL</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;uri = &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">uri</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;url = &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">url</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.获取请求方式</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;method = &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">method</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//4.获取请求头</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&#34;User-Agent&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;header = &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">header</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;request success&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="http响应协议">http响应协议
+</h2><h3 id="格式介绍">格式介绍：
+</h3><ul>
+<li>响应协议：服务器把数据以响应格式返回到浏览器。包括：<strong>响应行、响应头、响应体</strong></li>
+</ul>
+<p><img src="/typora-user-images/image-20251203103005790.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203103005790"
+	
+	
+></p>
+<ul>
+<li>响应行</li>
+<li>响应头</li>
+<li>响应体</li>
+</ul>
+<h3 id="响应状态码">响应状态码
+</h3><h3 id="设置响应数据">设置响应数据
+</h3><p><img src="/typora-user-images/image-20251203103117231.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203103117231"
+	
+	
+></p>
+<h1 id="3-springboot案例">3. springboot案例
+</h1><p>注意：</p>
+<ul>
+<li>
+<p>业务开发中，不使用基础数据类型，使用的都是包装类，因为基础数据类型都带有默认的数值比如0，不便于我们分辨是他就是0还是默认值是0</p>
+</li>
+<li>
+<p>@Data @NoArgsConstructor（无参构造） @AllArgsConstructor（全参数构造）这三个是Lombok依赖里面的注解，可以帮助我们自动配置所有成员变量的get和set方法，具体用法会在下面说明哦</p>
+</li>
+<li>
+<p>java文件定义的成员变量要与html文件中的信息对应，否则会报错</p>
+</li>
+<li>
+<p>Controller专门存放请求处理类（叫做控制层嘛），</p>
+</li>
+<li>
+<p><code>@RestController</code>这个注解是用来干嘛的？</p>
+</li>
+</ul>
+<h1 id="4-分层解耦">4. 分层解耦
+</h1><h2 id="41-三层架构">4.1 三层架构
+</h2><h3 id="411-介绍">4.1.1 介绍
+</h3><p>在我们进行程序设计以及程序开发时，尽可能让每一个接口、类、方法的职责更加单一（单一职责原则）</p>
+<blockquote>
+<p>单一职责原则：一个类或一个方法，就只做一件事情，只管一块功能。</p>
+<p>这样就可以让类、接口、方法的复杂度更低，可读性更强，扩展性更好，也更利于后期的维护。</p>
+</blockquote>
+<p><img src="/typora-user-images/image-20251203161955588.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203161955588"
+	
+	
+></p>
+<p>之前设计的案例程序，不满足单一职责原则。</p>
+<p>上述案例的处理逻辑，可以分成三部分：</p>
+<ul>
+<li>数据访问：负责业务数据的维护操作，包括增、删、改、查等操作。
+<ul>
+<li>对应Dao层</li>
+</ul>
+</li>
+<li>逻辑处理：负责业务逻辑处理的代码。
+<ul>
+<li>对应Service层</li>
+</ul>
+</li>
+<li>请求处理、响应数据：负责，接收页面的请求，给页面响应数据。
+<ul>
+<li>对应Controller层</li>
+</ul>
+</li>
+</ul>
+<p>于是，我们在项目开发之中，可以把代码分成三层，如图所示：</p>
+<p><img src="/typora-user-images/image-20251203162115258.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203162115258"
+	
+	
+></p>
+<ul>
+<li>Controller：控制层。接收前端发送的请求，对请求进行处理，并响应数据。</li>
+<li>Service：业务逻辑层。处理具体的业务逻辑。</li>
+<li>Dao:数据访问层（Data Access Object），也称为持久层。负责数据访问操作，包括数据的增删改查。</li>
+</ul>
+<p><img src="/typora-user-images/image-20251203162349531.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251203162349531"
+	
+	
+></p>
+<ul>
+<li>
+<p>前端发起的请求，由Controller层接收（Controller响应数据给前端）</p>
+</li>
+<li>
+<p>Controller层调用Service层来进行逻辑处理（Service层处理完后，把处理结果返回给Controller层）</p>
+</li>
+<li>
+<p>Serivce层调用Dao层（逻辑处理过程中需要用到的一些数据要从Dao层获取）</p>
+</li>
+<li>
+<p>Dao层操作文件中的数据（Dao拿到的数据会返回给Service层）</p>
+</li>
+</ul>
+<blockquote>
+<p>如果对业务逻辑层进行修改，不会影响其他两层，提高了程序的扩展性和可维护性。</p>
+</blockquote>
+<h3 id="41-2-代码实现">4.1. 2 代码实现
+</h3><h2 id="42-分层解耦">4.2 分层解耦
+</h2><h2 id="43-iocdi入门">4.3 IOC&amp;DI入门
+</h2><p>如果我们想要实现解耦操作，就涉及到了Spring的两个核心概念：</p>
+<blockquote>
+<ul>
+<li>
+<p><strong>控制反转</strong>：Inversion Of Control，简称IOC。对象的创建控制权由程序自身转移到外部（容器）😵</p>
+<p>（byd我怎么看不懂这句话什么意思？）</p>
+</li>
+<li>
+<p><strong>依赖注入</strong>：Dependency Injection，简称DI。容器为应用程序提供运行时，所依赖的资源，称之为依赖注入。</p>
+</li>
+<li>
+<p><strong>bean对象</strong>：IOC容器中创建、管理的对象，称之为：bean对象。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="44-ioc详解">4.4 IOC详解
+</h2><h2 id="45-di详解">4.5 DI详解
+</h2>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javaweb/">JavaWeb</a>
+        
+            <a href="/tags/web%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/">Web后端基础</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nonejsv-sun
+    </section>
+    
+    
+
+         
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.813bad6beeddf7b1b77b9b310c12e4750ca7ee2261912c07b883dbfb85f40fa1.js" defer></script><script type="text/javascript" src="/ts/custom.8361509b3cd938473657be612583719c66260e9dd2258b6c17fee51592310193.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="抽象类 1. 概述 针对面向对象中的继承专门设置\n使用了关键词abstract来进行对方法的定义，这样的方法可以叫做抽象类，抽象方法所在的类就叫做抽象类。\n可以用来解决在应对继承某些人故意不去重写子类的方法来应对需求，如果用abstract来进行标记，则在创造子类时必须进行对方法的重写，要不然报错。\n">
+<title>抽象类&amp;接口&amp;内部类</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E5%86%85%E9%83%A8%E7%B1%BB/'>
+
+<link rel="stylesheet" href="/scss/style.min.9e26333e0e4cbcd17e347c28bc55cec7b74a77458da2f67f750e2791f0ab5fc2.css"><meta property='og:title' content="抽象类&接口&内部类">
+<meta property='og:description' content="抽象类 1. 概述 针对面向对象中的继承专门设置\n使用了关键词abstract来进行对方法的定义，这样的方法可以叫做抽象类，抽象方法所在的类就叫做抽象类。\n可以用来解决在应对继承某些人故意不去重写子类的方法来应对需求，如果用abstract来进行标记，则在创造子类时必须进行对方法的重写，要不然报错。\n">
+<meta property='og:url' content='http://localhost:1313/p/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E5%86%85%E9%83%A8%E7%B1%BB/'>
+<meta property='og:site_name' content='Nonejsv-孙'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-26T11:18:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-26T11:18:00&#43;00:00'/>
+<meta name="twitter:title" content="抽象类&接口&内部类">
+<meta name="twitter:description" content="抽象类 1. 概述 针对面向对象中的继承专门设置\n使用了关键词abstract来进行对方法的定义，这样的方法可以叫做抽象类，抽象方法所在的类就叫做抽象类。\n可以用来解决在应对继承某些人故意不去重写子类的方法来应对需求，如果用abstract来进行标记，则在创造子类时必须进行对方法的重写，要不然报错。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/001_hu_1671c03090bcb588.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nonejsv-孙</a></h1>
+            <h2 class="site-description">欢迎来到我的博客，主要分享个人生活和学习笔记。</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Nonejsv'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/en/" >English</option>
+                                
+                                    <option value="http://localhost:1313/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>切换主题</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-概述">1. 概述</a></li>
+    <li><a href="#2抽象方法">2.抽象方法</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-为什么有接口">1. 为什么有接口？</a></li>
+    <li><a href="#2-定义格式">2. 定义格式</a></li>
+    <li><a href="#3-接口的特点">3. 接口的特点</a>
+      <ol>
+        <li><a href="#31-抽象方法">3.1 抽象方法</a></li>
+        <li><a href="#32-常量">3.2 常量</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-基本的实现">4. 基本的实现</a>
+      <ol>
+        <li><a href="#41-概述">4.1 概述</a></li>
+        <li><a href="#42-实现格式">4.2 实现格式</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-接口和接口的多继承">5. 接口和接口的多继承</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#内部类的分类">内部类的分类</a>
+      <ol>
+        <li><a href="#匿名内部类">匿名内部类</a>
+          <ol>
+            <li><a href="#使用场景">使用场景</a></li>
+            <li><a href="#匿名内部类的前提和格式">匿名内部类的前提和格式</a></li>
+            <li><a href="#匿名内部类的特点">匿名内部类的特点</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E5%86%85%E9%83%A8%E7%B1%BB/">抽象类&amp;接口&amp;内部类</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-11-26T11:18:00Z'>2025-11-26</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="抽象类">抽象类
+</h1><h2 id="1-概述">1. 概述
+</h2><p><strong>针对面向对象中的继承专门设置</strong></p>
+<p>使用了关键词abstract来进行对方法的定义，这样的方法可以叫做抽象类，抽象方法所在的类就叫做抽象类。</p>
+<p>可以用来解决在应对继承某些人故意不去重写子类的方法来应对需求，如果用abstract来进行标记，则在创造子类时必须进行对方法的重写，要不然报错。</p>
+<h2 id="2抽象方法">2.抽象方法
+</h2><ul>
+<li>抽象方法：将<strong>共性</strong>的行为（<strong>方法</strong>）抽取到父类之后，由于每一个子类的执行内容不一样，所以在父类之中不能确认<strong>具体的方法体</strong>。这样的方法就叫做抽象方法。</li>
+<li>抽象类:如果一个类之中<strong>存在抽象方法</strong>，该类就必须<strong>声明为抽象类</strong>。</li>
+</ul>
+<p>定义格式：</p>
+<ul>
+<li>
+<p>抽象方法：public <strong>abstract</strong> 返回值类型 方法名（参数列表）；</p>
+<p>​					（<strong>注意：抽象方法没有方法体</strong>，直接写分号结束）</p>
+</li>
+<li>
+<p>抽象类：public <strong>abstract</strong> class 类名{}</p>
+</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>抽象类不能实例化（抽象类不可以创建对象）</li>
+<li>抽象类不一定有抽象方法，有抽象方法一定是抽象类</li>
+<li>可以有构造方法（可是他都不可以创建对象，要构造方法干什么？抽象类的子类有什么用）</li>
+<li>抽象类的子类
+<ul>
+<li>要么重写父类中的所有抽象方法</li>
+<li>要么子类也是抽象类</li>
+</ul>
+</li>
+</ul>
+<h1 id="接口">接口
+</h1><h2 id="1-为什么有接口">1. 为什么有接口？
+</h2><p>在面向对象的过程中，会遇到比如一个父类多个子类的情况下，想要给几个特定的子类中接入同一个方法，但是也要限定某几个子类不会接入同一个方法，这种情况下不能直接把这个方法写在父类之中，否则这个方法会所有的子类都具有，不符合我们的要求。</p>
+<p>这个时候，就需要接口的存在，我们可以设定单一方法的接口，然后再我们需要的子类中接入这个接口，就可以实现相应的方法，符合我们的需求了。</p>
+<p><strong>注意，接口之中全部都是抽象方法，接口之中同样也是不可以创建对象的</strong></p>
+<h2 id="2-定义格式">2. 定义格式
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//接口的定义格式：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">interface</span> <span class="nc">接口名称</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 抽象方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 接口的声明：interface</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 接口名称：首字母大写，满足“驼峰模式”</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>接口的声明：interface</p>
+<h2 id="3-接口的特点">3. 接口的特点
+</h2><p>在JDK7，接口中<strong>只有</strong>包含：抽象方法和常量</p>
+<h3 id="31-抽象方法">3.1 抽象方法
+</h3><p>注意，接口之中的抽象方法会自动加上<code>public abstract</code>修饰，而我们不需要自己手动再加上。</p>
+<p>按照规范，这个不用加，因为默认会加上</p>
+<h3 id="32-常量">3.2 常量
+</h3><p>在接口之中的成员变量会自动加上<code>public abstract final</code>来进行修饰，所以说他实际上不可被修改，是一个常量。同时静态化的变量可以直接用接口名访问，所以也叫作常量。</p>
+<p>常量必须要给初始值，同时建议命名全部用大写字母，多个单词用下划线连接。</p>
+<h2 id="4-基本的实现">4. 基本的实现
+</h2><p>（😘家人们，终于看到实现了）</p>
+<h3 id="41-概述">4.1 概述
+</h3><p>类和接口之间的关系叫做实现关系，即<strong>类实现接口</strong>，这个类可以叫做接口的实现类，也可以叫做接口的子类。实现的动作类似继承，格式相仿，只是关键字不同，实现使用<code>implements</code>关键字。</p>
+<h3 id="42-实现格式">4.2 实现格式
+</h3><h2 id="5-接口和接口的多继承">5. 接口和接口的多继承
+</h2><ul>
+<li>类与接口是实现关系</li>
+<li>接口与接口是继承关系</li>
+</ul>
+<p>接口继承接口就是把其他接口的抽象方法与本接口进行了合并。</p>
+<h1 id="内部类">内部类
+</h1><h2 id="概述">概述
+</h2><p>类的五大成员：属性，方法，构造方法，代码块，内部类</p>
+<ul>
+<li>属性</li>
+<li>方法</li>
+<li>构造方法</li>
+<li>代码块</li>
+<li>内部类（双重类）</li>
+</ul>
+<p>思考应用场景：</p>
+<p>类是一个抽象对象，而属性和行为是他的主体，但是属性也可以有多种分类，比如人可以分为器官组织细胞，从某个层面来说，器官这类也属于一个单独的个体，这个时候就可以使用内部类加以分类</p>
+<p><em><strong>B类事物是A类事物的一部分，而且B类事物单独存在没有意义</strong></em></p>
+<p>比如：汽车的发动机，ArrayList的迭代器，人的心脏</p>
+<blockquote>
+<p>内部类表示的事物是外部的一部分</p>
+<p>内部类单独出现没有意义</p>
+</blockquote>
+<p>内部类的访问特点：</p>
+<ul>
+<li>可以直接访问外部类的成员，包括私有</li>
+<li>外部类要访问内部类的成员，必须创建对象（有点不理解：大概就是在外部类调用内部类是，要先用new的方式创建对象）</li>
+</ul>
+<p>举例：Arraylist中的迭代器也是一种内部类</p>
+<p>使用快捷键ctrl+F2  可以快速查看当前类的内部结构（包含的方法，内部类等）</p>
+<h2 id="内部类的分类">内部类的分类
+</h2><ul>
+<li>成员内部类</li>
+<li>静态内部类</li>
+<li>局部内部类</li>
+<li>匿名内部类</li>
+</ul>
+<p>（前三个了解即可，会在看源代码是去了解，第四个最重要）</p>
+<h3 id="匿名内部类">匿名内部类
+</h3><p>（就是隐藏了名字的内部类，可以写在成员位置（方法外面），也可以写在局部位置（方法里面））</p>
+<p>书写格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">new 类名或者接口名（） {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">​	//重写方法；
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}；
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现关系（实现了类名或者接口名的关系）</li>
+<li>方法的重写（）</li>
+<li>创建对象（使用了new创建没有名字的对象）</li>
+</ul>
+<p>（<em><strong>从语法上来解释，应该叫做匿名内部类的对象</strong></em>）</p>
+<h4 id="使用场景">使用场景
+</h4><p><strong>当我们希望定义一个只会使用一次的类，就可以考虑使用匿名内部类。本质上，它可以简化代码。</strong>
+之前所学习的内容在使用接口时，有如下操作（我是跳过来的，不知道有什么操作）：</p>
+<ol>
+<li>定义子类</li>
+<li>重写接口中的方法</li>
+<li>创建子类对象</li>
+<li>调用重写后的方法</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">interface</span> <span class="nc">Swim</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">swimming</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 1. 定义接口的实现类</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Swim</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 2. 重写抽象方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">swimming</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;狗刨式...&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 3. 创建实现类对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Student</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 4. 调用方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">s</span><span class="p">.</span><span class="na">swimming</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>而匿名内部类就是简化四步为一步的快捷方式</p>
+<h4 id="匿名内部类的前提和格式">匿名内部类的前提和格式
+</h4><p><strong>必须继承一个父类</strong>或者<strong>实现一个父接口</strong></p>
+<p>格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span><span class="w"> </span><span class="n">父类名或者接口名</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 方法重写</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 执行语句</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="匿名内部类的特点">匿名内部类的特点
+</h4><ol>
+<li></li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nonejsv-sun
+    </section>
+    
+    
+
+         
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.813bad6beeddf7b1b77b9b310c12e4750ca7ee2261912c07b883dbfb85f40fa1.js" defer></script><script type="text/javascript" src="/ts/custom.8361509b3cd938473657be612583719c66260e9dd2258b6c17fee51592310193.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
